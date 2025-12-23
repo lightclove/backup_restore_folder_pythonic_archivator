@@ -80,17 +80,48 @@ python -m utils.backup_folder <source_dir> [--output <output_path>] [--password]
 #### Примеры
 
 ```bash
+### Универсальные примеры:
 # Создать бэкап текущей директории
-python -m utils.backup_folder .
+python backup_folder.py .
 
 # Создать бэкап с указанием выходного файла
-python -m utils.backup_folder /home/user/documents --output /backup/documents_backup.zip
+python backup_folder.py /home/user/documents --output /backup/documents_backup.zip
 
 # Создать защищенный паролем бэкап
-python -m utils.backup_folder /home/user/important --password
+python backup_folder.py /home/user/important --password
 
 # Создать бэкап без пароля (даже если pyzipper установлен)
-python -m utils.backup_folder /home/user/data --no-password
+python backup_folder.py /home/user/data --no-password
+
+### Специфические примеры (Windows):
+1. Простое резервное копирование (без пароля)
+# Резервная копия папки docs в родительскую директорию
+python .\utils\backup_folder.py docs
+# Резервная копия папки data
+python backup_folder.py data
+# Резервная копия с полным путем
+python backup_folder.py "C:\Users\user\Work\"
+2. Резервное копирование с указанием выходной директории
+# Сохранить архив в папку backups
+python backup_folder.py docs --output backups
+# Сохранить архив в другую директорию
+python backup_folder.py data --output "D:\Backups"
+# Короткая форма параметра
+python backup_folder.py utils -o backups
+3. Резервное копирование с паролем
+# Создать защищенный паролем архив
+python .\utils\backup_folder.py docs --password
+# С паролем и указанием выходной директории
+python .\utils\backup_folder.py data --password --output backups
+# Явно указать, что пароль не нужен
+python .\utils\backup_folder.py docs --no-password
+4. Комбинированные примеры (если, допустим, скрипт лежиит в папке utils) 
+# Полный пример: папка, выходная директория, пароль
+python .\utils\backup_folder.py "docs\02_BUGS" --output "D:\Backups" --password
+# Резервная копия папки tests в текущую директорию
+python .\utils\backup_folder.py tests --output .
+# Резервная копия папки utils с паролем в папку backups
+python .\utils\backup_folder.py utils -o backups --password
 ```
 
 #### Выходные данные
